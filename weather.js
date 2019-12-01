@@ -58,9 +58,9 @@ navigator.geolocation.watchPosition(function (position) {
                     icon.setAttribute("src", "http://openweathermap.org/img/wn/04d@2x.png");
                 } else if (weather.weather[0].icon === '04n') {
                     icon.setAttribute("src", "http://openweathermap.org/img/wn/04n@2x.png");
-                } else if (weather.weather[0].icon === '9d') {
+                } else if (weather.weather[0].icon === '09d') {
                     icon.setAttribute("src", "http://openweathermap.org/img/wn/09d@2x.png");
-                } else if (weather.weather[0].icon === '9n') {
+                } else if (weather.weather[0].icon === '09n') {
                     icon.setAttribute("src", "http://openweathermap.org/img/wn/09n@2x.png");
                 } else if (weather.weather[0].icon === '10d') {
                     icon.setAttribute("src", "http://openweathermap.org/img/wn/10d@2x.png");
@@ -138,9 +138,9 @@ button.addEventListener('click', () => {
                 icon.setAttribute("src", "http://openweathermap.org/img/wn/04d@2x.png");
             } else if (weather.weather[0].icon === '04n') {
                 icon.setAttribute("src", "http://openweathermap.org/img/wn/04n@2x.png");
-            } else if (weather.weather[0].icon === '9d') {
+            } else if (weather.weather[0].icon === '09d') {
                 icon.setAttribute("src", "http://openweathermap.org/img/wn/09d@2x.png");
-            } else if (weather.weather[0].icon === '9n') {
+            } else if (weather.weather[0].icon === '09n') {
                 icon.setAttribute("src", "http://openweathermap.org/img/wn/09n@2x.png");
             } else if (weather.weather[0].icon === '10d') {
                 icon.setAttribute("src", "http://openweathermap.org/img/wn/10d@2x.png");
