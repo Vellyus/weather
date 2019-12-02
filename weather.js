@@ -20,7 +20,6 @@ if (navigator.language === 'hu-HU') {
     lang = 'en';
 }
 
-navigator.geolocation.watchPosition(function (position) {
     navigator.geolocation.getCurrentPosition(position => {
         let lon = position.coords.longitude;
         let lat = position.coords.latitude;
@@ -86,7 +85,7 @@ navigator.geolocation.watchPosition(function (position) {
         xhr.send();
     })
 
-},
+
     function (error) {
         if (error.code == error.PERMISSION_DENIED) {
             if (navigator.language === 'hu-HU') {
