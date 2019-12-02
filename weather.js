@@ -20,7 +20,7 @@ if (navigator.language === 'hu-HU') {
     lang = 'en';
 }
 
-    navigator.geolocation.getCurrentPosition(position => {
+   function() => { navigator.geolocation.getCurrentPosition(position => {
         let lon = position.coords.longitude;
         let lat = position.coords.latitude;
 
@@ -84,7 +84,7 @@ if (navigator.language === 'hu-HU') {
         xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&units=metric' + '&lang=' + lang);
         xhr.send();
     })
-
+  };
 
     function (error) {
         if (error.code == error.PERMISSION_DENIED) {
