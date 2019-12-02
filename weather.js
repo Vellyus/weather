@@ -81,7 +81,7 @@ navigator.geolocation.getCurrentPosition(function (position) {
         }
     };
 
-    xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&units=metric' + '&lang=' + lang);
+    xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&units=metric' + '&lang=' + lang);
     xhr.send();
 
 
@@ -159,7 +159,7 @@ button.addEventListener('click', () => {
             }
         }
     };
-    xhr.open('GET', 'http://api.openweathermap.org/data/2.5/weather?q=' + input + '&units=metric' + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&lang=' + lang);
+    xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + input + '&units=metric' + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&lang=' + lang);
     xhr.send();
 });
 
