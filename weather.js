@@ -23,11 +23,11 @@ function getTime() {
     day = now.getUTCDay();
 
     function getHH() {
-        if (now.getUTCHours() + weather.timezone / 3600 > 24) {
+        if (now.getUTCHours() + weather.timezone / 3600 >= 24) {
             day += 1;
 
             return now.getUTCHours() + weather.timezone / 3600 - 24;
-        } else if (now.getUTCHours() + weather.timezone / 3600 < 0) {
+        } else if (now.getUTCHours() + weather.timezone / 3600 <= 0) {
             day -= 1;
 
             return now.getUTCHours() + weather.timezone / 3600 + 24;
@@ -41,7 +41,7 @@ function getTime() {
     if (Number.isInteger((hh - 0.5))) {
         hh -= 0.5;
         mm += 30;
-        if (mm > 60) {
+        if (mm >= 60) {
             mm -= 60;
             hh += 1;
         }
