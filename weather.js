@@ -10,6 +10,22 @@ let day;
 let dayDiv = document.querySelector('.day');
 let weather;
 
+// Functions
+function checkStatus(response) {
+    if (response.ok) {
+        return Promise.resolve(response);
+    } else {
+        return Promise.reject(new Error(response.statusText));
+    }
+}
+
+function fetchData(url) {
+    return fetch(url)
+        .then(checkStatus)
+        .then(res => res.json())
+        .catch(error => console.log('Looks like there was a problem!', error))
+}
+
 function getTime() {
     function pad(number) {
         if (number < 10) {
@@ -88,6 +104,20 @@ function getTime() {
 
     return `${hh}:${mm}:${ss}`;
 }
+function tickClock() {
+    clockDiv.textContent = getTime();
+}
+
+function displayResults() {
+    city.innerText = weather.name;
+    temp.innerText = weather.main.temp + ' °C';
+    desc.innerText = weather.weather[0].description;
+
+    icon.style.display = "initial";
+    temp.style.display = "initial";
+    desc.style.display = "initial";
+
+}
 
 function displayIcon() {
     if (weather.weather[0].icon === '01d') {
@@ -128,6 +158,7 @@ function displayIcon() {
         icon.setAttribute("src", "http://openweathermap.org/img/wn/50n@2x.png");
     }
 }
+// End of Functions
 
 // Ask user to enable geolocation
 city.innerText = 'Please enable to acces your location or search for a city name!';
@@ -150,48 +181,27 @@ navigator.geolocation.getCurrentPosition(function (position) {
     let lon = position.coords.longitude;
     let lat = position.coords.latitude;
 
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            weather = JSON.parse(xhr.responseText);
-
-            function tickClock() {
-                clockDiv.textContent = getTime();
-            }
-
-            myTimer = setInterval(tickClock, 1000);
-
-            // Display results
-            city.innerText = weather.name;
-            temp.innerText = weather.main.temp + ' °C';
-            desc.innerText = weather.weather[0].description;
-
-            icon.style.display = "initial";
-            temp.style.display = "initial";
-            desc.style.display = "initial";
-
-            // Display Icon
-            displayIcon();
-        }
-    };
-
-    xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&units=metric' + '&lang=' + lang);
-    xhr.send();
-},
-
-    // If user disabled geolocation
-    function (error) {
-        if (error.code == error.PERMISSION_DENIED) {
-            if (navigator.language === 'hu') {
-                city.innerText = 'Engedélyezz hozzáférést a tartózkodási helyedhez vagy keress egy város neve alapján!';
-            } else {
-                city.innerText = 'Please enable to acces your location or search for a city name!';
-            }
-            icon.style.display = "none";
-            temp.style.display = "none";
-            desc.style.display = "none";
-        }
+    fetchData('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + lon + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&units=metric' + '&lang=' + lang).then(data => {
+        weather = data;
+        myTimer = setInterval(tickClock, 1000);
+        displayResults();
+        displayIcon();
     });
+})
+
+// If user disabled geolocation
+function checkForPermission(error) {
+    if (error.code == error.PERMISSION_DENIED) {
+        if (navigator.language === 'hu') {
+            city.innerText = 'Engedélyezz hozzáférést a tartózkodási helyedhez vagy keress egy város neve alapján!';
+        } else {
+            city.innerText = 'Please enable to acces your location or search for a city name!';
+        }
+        icon.style.display = "none";
+        temp.style.display = "none";
+        desc.style.display = "none";
+    }
+};
 
 // Search button
 button.addEventListener('click', () => {
@@ -201,35 +211,14 @@ button.addEventListener('click', () => {
 
     let input = document.querySelector('input').value;
     // XHR by search
-    var xhr = new XMLHttpRequest();
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            weather = JSON.parse(xhr.responseText);
 
-            function tickClock() {
-                clockDiv.textContent = getTime();
-            }
-
-            myTimer = setInterval(tickClock, 1000);
-
-            // Display results
-            city.innerText = weather.name;
-            temp.innerText = weather.main.temp + ' °C';
-            desc.innerText = weather.weather[0].description;
-
-            icon.style.display = "initial";
-            temp.style.display = "initial";
-            desc.style.display = "initial";
-
-            // Display Icon
-            displayIcon();
-        }
-    };
-    xhr.open('GET', 'https://api.openweathermap.org/data/2.5/weather?q=' + input + '&units=metric' + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&lang=' + lang);
-    xhr.send();
-}
-);
-
+    fetchData('https://api.openweathermap.org/data/2.5/weather?q=' + input + '&units=metric' + '&APPID=7acc8d6ed18a854281620e6f354390a6' + '&lang=' + lang).then(data => {
+        weather = data;
+        myTimer = setInterval(tickClock, 1000);
+        displayResults();
+        displayIcon();
+    })
+})
 
 
 
