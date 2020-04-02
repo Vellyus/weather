@@ -81,3 +81,17 @@ button:hover {
     font-family: 'Cutive Mono', monospace;
     font-weight: 600;
 }
+
+@media(max-width: 47em) {
+
+    html {
+        height: 100%;
+    }
+}
+
+@media(max-width: 25em) {
+
+    html {
+        height: 100%;
+    }
+}
