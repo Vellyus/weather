@@ -4,13 +4,16 @@
     box-sizing: border-box;
 }
 
+html {
+    background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
+}
+
 body {
     height: 100vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    background: linear-gradient(rgb(47, 150, 163), rgb(48, 62, 143));
     font-family: sans-serif;
     color: white;
     text-align: center;
@@ -80,18 +83,4 @@ button:hover {
     margin-bottom: 1rem;
     font-family: 'Cutive Mono', monospace;
     font-weight: 600;
-}
-
-@media(max-width: 47em) {
-
-    body {
-        height: 100%;
-    }
-}
-
-@media(max-width: 25em) {
-
-    body {
-        height: 100%;
-    }
 }
