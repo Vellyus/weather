@@ -84,14 +84,14 @@ button:hover {
 
 @media(max-width: 47em) {
 
-    html {
+    body {
         height: 100%;
     }
 }
 
 @media(max-width: 25em) {
 
-    html {
+    body {
         height: 100%;
     }
 }
