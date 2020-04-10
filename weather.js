@@ -3,6 +3,7 @@ const city = document.querySelector('#city');
 const icon = document.querySelector('#icon');
 const temp = document.querySelector('#temp');
 const desc = document.querySelector('#desc');
+const info = document.querySelector('#info');
 let lang;
 const clockDiv = document.querySelector('.clock');
 let myTimer; // var for the interval reset
@@ -113,6 +114,8 @@ function displayResults() {
     temp.innerText = weather.main.temp + ' °C';
     desc.innerText = weather.weather[0].description;
 
+    info.style.display = "none";
+    city.style.display = "initial";
     icon.style.display = "initial";
     temp.style.display = "initial";
     desc.style.display = "initial";
@@ -161,7 +164,8 @@ function displayIcon() {
 // End of Functions
 
 // Ask user to enable geolocation
-city.innerText = 'Please enable to acces your location or search for a city name!';
+info.style.display = "initial";
+city.style.display = "none";
 icon.style.display = "none";
 temp.style.display = "none";
 desc.style.display = "none";
@@ -171,9 +175,11 @@ if (navigator.language === 'hu') {
     lang = 'hu';
     document.querySelector('input').setAttribute('placeholder', 'Írd be egy város nevét!');
     document.querySelector('button').innerText = 'Keresés';
-    city.innerText = 'Engedélyezz hozzáférést a tartózkodási helyedhez vagy keress egy város neve alapján!';
+    info.innerText = 'Engedélyezz hozzáférést a tartózkodási helyedhez vagy keress egy város neve alapján!';
 } else {
     lang = 'en';
+    info.innerText = 'Please enable acces to your location or search for a city name!';
+
 }
 
 // XHR by geolocation
@@ -193,10 +199,12 @@ navigator.geolocation.getCurrentPosition(function (position) {
 function checkForPermission(error) {
     if (error.code == error.PERMISSION_DENIED) {
         if (navigator.language === 'hu') {
-            city.innerText = 'Engedélyezz hozzáférést a tartózkodási helyedhez vagy keress egy város neve alapján!';
+            info.innerText = 'Engedélyezz hozzáférést a tartózkodási helyedhez vagy keress egy város neve alapján!';
         } else {
-            city.innerText = 'Please enable to acces your location or search for a city name!';
+            info.innerText = 'Please enable acces to your location or search for a city name!';
         }
+        info.style.display = "initial";
+        city.style.display = "none";
         icon.style.display = "none";
         temp.style.display = "none";
         desc.style.display = "none";

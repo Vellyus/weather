@@ -83,3 +83,8 @@ button:hover {
     font-family: 'Cutive Mono', monospace;
     font-weight: 600;
 }
+
+#info {
+    display: none;
+    line-height: 1.6;
+}
