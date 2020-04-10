@@ -87,4 +87,5 @@ button:hover {
 #info {
     display: none;
     line-height: 1.6;
+    margin-top: 2em;
 }
