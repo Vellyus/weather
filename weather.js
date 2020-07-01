@@ -63,6 +63,11 @@ function getTime() {
             hh += 1;
         }
     }
+
+    if (hh === 24) {
+        hh = 0;
+        day += 1;
+    }
     hh = pad(hh);
     mm = pad(mm);
     ss = pad(ss);
