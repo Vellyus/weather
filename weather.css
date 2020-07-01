@@ -29,6 +29,10 @@ body {
     flex-wrap: wrap;
 }
 
+.location {
+    margin-top: 1em;
+}
+
 .temperature {
     flex-direction: column;
 }
